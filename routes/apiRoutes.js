@@ -17,12 +17,10 @@ module.exports = function(app) {
   });
 
   app.put("/api/workouts/:id", async ({body, params}, res) => {
-    console.log(body)
     const workoutUpdated = await db.Workout.findByIdAndUpdate(
       params.id,
       { $push: { exercises: body } },
       { new: true, upsert: true, useFindandModify: false },
     );
-      console.log(workoutUpdated);
     res.json(workoutUpdated)
   })};
